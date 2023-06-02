@@ -14,18 +14,55 @@
 </head>
 
     <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Dealership Review</a>
+        
+                    {% if user.is_authenticated %}
+                    <!-- <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <span class="nav-link text-light">{{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="btn btn-secondary">Logout</a>
+                        </li>
+                    </ul> -->
+                    <div class="navbar-nav ml-auto">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link text-light mr-2">{{ user.username }}</span>
+                            <a href="#" class="btn btn-secondary">Logout</a>
+                        </div>
+                    </div>
+                    
 
-    <!--Add a nav bar here -->
-    <nav>
-        <ul>
-          <li><a href="{% url 'djangoapp:about' %}">About Us</a></li>
-          <li><a href="{% url 'djangoapp:contact' %}">Contact Us</a></li>
-        </ul>
-      </nav>
+                    {% else %}
+                    <form class="form-inline ml-auto">
+                        <label class="mr-2 text-light" for="username">Username:</label>
+                        <input type="text" class="form-control mr-2" id="username" name="username" required>
+        
+                        <label class="mr-2 text-light" for="password">Password:</label>
+                        <input type="password" class="form-control mr-2" id="password" name="password" required>
+        
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-secondary">Signup</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </nav>
 
-    <!--Add a dealer table here -->
+
+
+        </header>
+
+        <nav>
+            <ul>
+            <li><a href="{% url 'djangoapp:about' %}">About Us</a></li>
+            <li><a href="{% url 'djangoapp:contact' %}">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <!--Add a dealer table here -->
 
     </body>
 
