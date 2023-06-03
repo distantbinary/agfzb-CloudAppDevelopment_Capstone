@@ -37,18 +37,18 @@ def login_request(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('djangoapp/index.html')
+            return redirect('djangoapp:index')
         else:
             # Handle invalid login credentials
-            return render(request, 'djangoapp/index.html', {'error': 'Invalid username or password'})
+            return render(request, 'djangoapp:index', {'error': 'Invalid username or password'})
     else:
-        return render(request, 'djangoapp/index.html')
+        return redirect('djangoapp:index')
 
 
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):
     logout(request)
-    return redirect('djangoapp/index.html')
+    return redirect('djangoapp:index')
 
 
 # Create a `registration_request` view to handle sign up request
