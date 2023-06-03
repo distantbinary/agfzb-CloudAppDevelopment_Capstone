@@ -41,12 +41,19 @@
 
         </header>
 
-        <!-- <nav>
+        <nav>
             <ul>
             <li><a href="{% url 'djangoapp:about' %}">About Us</a></li>
             <li><a href="{% url 'djangoapp:contact' %}">Contact Us</a></li>
             </ul>
-        </nav> -->
+        </nav>
+
+        <ul>
+            {% for dealer_name in dealer_names %}
+              <li>{{ dealer_name }}</li>
+            {% endfor %}
+        </ul>
+          
 
         <!--Add a dealer table here -->
 
