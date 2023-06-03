@@ -33,7 +33,7 @@
                         <input type="password" class="form-control mr-2" placeholder="Enter Password: " id="password" name="password" required style="background-color:#E6F3FF; border-color:#99C2FF;">
 
                         <button type="submit" class="btn btn-primary">Login</button>
-                        <button type="button" class="btn btn-link">Signup</button>
+                        <a href="{% url 'djangoapp:registration' %}" class="btn btn-link">Signup</a>
                     </form>
                     {% endif %}
                 </div>
