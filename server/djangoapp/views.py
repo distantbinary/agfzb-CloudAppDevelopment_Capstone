@@ -40,7 +40,7 @@ def login_request(request):
             return redirect('djangoapp:index')
         else:
             # Handle invalid login credentials
-            return render(request, 'djangoapp:index', {'error': 'Invalid username or password'})
+            return render(request, 'djangoapp/index.html', {'error': 'Invalid username or password'})
     else:
         return redirect('djangoapp:index')
 

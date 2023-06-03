@@ -11,19 +11,19 @@ urlpatterns = [
     path(route='base/', view=views.base_view, name='base'),
 
     # path for about view
-    path('about/', views.about, name='about'),
+    path(route='about/', view=views.about, name='about'),
 
     # path for contact us view
-    path('contact/', views.contact, name='contact'),
+    path(route='contact/', view=views.contact, name='contact'),
 
 
     # path for registration
 
     # path for login
-    path('login/', views.login_request, name='login'),
+    path(route='login/', view=views.login_request, name='login'),
 
     # path for logout
-    path('logout/', views.logout_request, name='logout'),
+    path(route='logout/', view=views.logout_request, name='logout'),
 
     path(route='', view=views.get_dealerships, name='index'),
 
