@@ -105,11 +105,20 @@ def get_dealerships(request):
         return HttpResponse(dealer_names)
 
 
-
-
 # Create a `get_dealer_details` view to render the reviews of a dealer
-# def get_dealer_details(request, dealer_id):
-# ...
+def get_dealer_details(request, dealer_id):
+    if request.method == "GET":
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/22113336-9c90-43fa-9d87-eed5f287930e/dealership-package/get-review"
+        # Get dealers from the URL
+
+        dealerships = get_dealer_reviews_from_cf(url, dealer_id)
+
+        # Concat all dealer's review???
+        dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
+        # Return a list of dealer review
+        return HttpResponse(dealer_names)
+
+
 
 # Create a `add_review` view to submit a review
 # def add_review(request, dealer_id):
