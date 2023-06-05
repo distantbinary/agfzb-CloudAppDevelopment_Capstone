@@ -114,7 +114,7 @@ def get_dealer_details(request, dealer_id):
     if request.method == "GET" and dealer_id:
 
         # URL to retrieve dealer review from online database
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/22113336-9c90-43fa-9d87-eed5f287930e/dealership-package/get-review?id="+str(dealer_id)
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/22113336-9c90-43fa-9d87-eed5f287930e/dealership-package/get-review?dealerId="+str(dealer_id)
 
         review = get_dealer_reviews_from_cf(url, dealer_id)
         context = {"dealer_reviews" : review}
