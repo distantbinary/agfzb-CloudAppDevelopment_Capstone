@@ -34,7 +34,4 @@ urlpatterns = [
     # path for add a review view
     path('addreview/<int:dealer_id>/', views.add_review, name='add_review'),
 
-    # ibm-nlu test
-    path('ibm_nlu/', views.ibm_nlu, name='ibm_nlu'),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

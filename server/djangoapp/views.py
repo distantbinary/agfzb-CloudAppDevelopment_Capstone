@@ -124,15 +124,35 @@ def get_dealer_details(request, dealer_id):
 
 # Create a `add_review` view to submit a review
 def add_review(request, dealer_id):
-    pass
+    # untested
 
-    review["time"] = datetime.utcnow().isoformat()
-    review["dealership"] = 11
-    review["review"] = "This is a great car dealer"
-    post_request(url, json_payload, dealerId=dealer_id)
+    if request.method == "GET":
+        cars = CarModel.objects.filter(dealer_id=dealer_id)
+        context = { "cars": cars, "dealer_id": dealer_id }
+        return render(request, "djangoapp/add_review.html", context)
+    
+    if request.method == "POST":
+        carId = request.POST.get("car")
+        car = CarModel.objects.get(id=carId)
+        purchase = "false"
+        if request.POST.get("purchasecheck") == "on":
+            purchase = "true"
+        review_data = request.POST
+        review = {"review": {}}
+        review["review"]["time"] = datetime.utcnow().isoformat()
+        review["review"]["dealership"] = dealer_id
+        review["review"]["review"] = review_data.get("content", "")
+        review["review"]["name"] = request.user.first_name
+        review["review"]["purchase"] = purchase
+        review["review"]["purchase_date"] = review_data.get("purchasedate", "")
+        review["review"]["car_make"] = car.car_make.name
+        review["review"]["car_model"] = car.name
+        review["review"]["car_year"] = car.car_year.strftime("%Y")
 
-
-def ibm_nlu(request):
-    text="Expanded global groupware"
-    translated = analyze_review_sentiments(text)
-    return render(request, 'djangoapp/ibmnlu.html', {"translated":translated})
+        response = post_request(
+            "https://us-south.functions.appdomain.cloud/api/v1/web/7ccc880f-504c-4f24-a816-b01352454616/dealership-package/post-review",
+            review,
+            dealerId=dealer_id
+        )
+        
+        return redirect("djangoapp:dealer_details", dealer_id=dealer_id)

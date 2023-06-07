@@ -6,7 +6,13 @@ from django.utils.timezone import now
 class CarMake(models.Model):
     name = models.CharField(max_length=250)
     description = models.CharField(max_length=250, null=True)
-    country = models.CharField(max_length=100, null=True)
+
+    def dealer_id(self):
+        car_models = self.carmodel_set.all()
+        if car_models.exists():
+            return car_models.first().dealer_id
+        else:
+            return None
 
     def __str__(self):
         return self.name
@@ -63,7 +69,7 @@ class DealerReview:
                 name, purchase,
                 review, purchase_date,
                 car_make, car_model,
-                car_year, # sentiment,
+                car_year, sentiment,
                 id):
         self.dealership = dealership
         self.name = name
@@ -73,7 +79,7 @@ class DealerReview:
         self.car_make = car_make
         self.car_model = car_model
         self.car_year = car_year
-        # self.sentiment = sentiment
+        self.sentiment = sentiment
         self.id = id
 
     def __str__(self):
