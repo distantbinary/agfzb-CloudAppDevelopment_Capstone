@@ -130,3 +130,9 @@ def add_review(request, dealer_id):
     review["dealership"] = 11
     review["review"] = "This is a great car dealer"
     post_request(url, json_payload, dealerId=dealer_id)
+
+
+def ibm_nlu(request):
+    text="Expanded global groupware"
+    translated = analyze_review_sentiments(text)
+    return render(request, 'djangoapp/ibmnlu.html', {"translated":translated})
